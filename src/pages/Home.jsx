@@ -21,7 +21,7 @@ export default function Home() {
       {/* Hero Section */}
       <div className="bg-gray-100 p-10 rounded-lg text-center">
         <h1 className="text-4xl font-bold mb-4">
-          Welcome to MyStore
+          Welcome to MyStore 🚀
         </h1>
 
         <p className="text-gray-600 mb-6">

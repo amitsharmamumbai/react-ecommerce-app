@@ -38,7 +38,7 @@ export default function Home() {
 
       {/* Featured Products */}
       <div>
-        <h2 className="text-2xl font-bold mb-6">
+        <h2 className="text-2xl pt-6 font-bold mb-6">
           Featured Products
         </h2>
 

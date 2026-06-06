@@ -11,7 +11,9 @@ export default function Home() {
 
   useEffect(() => {
     getProducts().then((res) => {
-      setProducts(res.data.slice(0, 4)); // show only 4
+      setProducts(
+        res.data.products.slice(0, 8)
+      );
     });
   }, []);
 

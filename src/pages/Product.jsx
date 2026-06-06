@@ -11,12 +11,16 @@ export default function Product() {
   // const [cart , setCart] = useState([]);
   const { addToCart } = useContext(CartContext);
 
+  const [searchTerm, setSearchTerm] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("all");
+  const [sortOption, setSortOption] = useState("");
+
   useEffect(()=>{
     getProducts()
     .then((res)=>{
-        setProducts(res.data);
-        setLoading(false);
-    })
+      setProducts(res.data.products);
+      setLoading(false);
+  })
     .catch((err)=>{
         console.log(err);
         setError(true);
@@ -36,10 +40,30 @@ export default function Product() {
     return <h1 className="p-8 text-red-500">Something went wrong</h1>;
   }
 
+  const filteredProducts = products.filter((product) => 
+    product.title
+      .toLowerCase()
+      .includes(
+        searchTerm.toLowerCase()
+      )
+  )
+
   return (
     <div className="px-4 pt-8 max-w-6xl mx-auto">
         <h1 className="text-2xl font-bold mb-6">All Products</h1>
+        <div className="mb-6">
 
+          <input
+            type="text"
+            placeholder="Search products..."
+            value={searchTerm}
+            onChange={(e) =>
+              setSearchTerm(e.target.value)
+            }
+            className="border p-2 rounded w-full"
+          />
+<p>{searchTerm}</p>
+        </div>
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
           {products.map((item) => (
             <ProductCard

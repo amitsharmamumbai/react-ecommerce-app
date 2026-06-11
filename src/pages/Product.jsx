@@ -40,13 +40,23 @@ export default function Product() {
     return <h1 className="p-8 text-red-500">Something went wrong</h1>;
   }
 
-  const filteredProducts = products.filter((product) => 
+  let filteredProducts = products.filter((product) =>
     product.title
       .toLowerCase()
-      .includes(
-        searchTerm.toLowerCase()
-      )
-  )
+      .includes(searchTerm.toLowerCase())
+  );
+
+  if (selectedCategory !== "all") {
+    filteredProducts = filteredProducts.filter(
+      (product) =>
+        product.category === selectedCategory
+    );
+  }
+
+  const categories = [
+    "all",
+    ...new Set(products.map((product) => product.category))
+  ];
 
   return (
     <div className="px-4 pt-8 max-w-6xl mx-auto">
@@ -62,10 +72,27 @@ export default function Product() {
             }
             className="border p-2 rounded w-full"
           />
-<p>{searchTerm}</p>
+
+          <select
+            value={selectedCategory}
+            onChange={(e) =>
+              setSelectedCategory(e.target.value)
+            }
+            className="border p-2 rounded mt-4 w-full"
+          >
+            {categories.map((category) => (
+              <option
+                key={category}
+                value={category}
+              >
+                {category}
+              </option>
+            ))}
+          </select>
+
         </div>
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
-          {products.map((item) => (
+          {filteredProducts.map((item) => (
             <ProductCard
               key={item.id}
               item={item}

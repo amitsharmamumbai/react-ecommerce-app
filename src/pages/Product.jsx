@@ -58,10 +58,28 @@ export default function Product() {
     ...new Set(products.map((product) => product.category))
   ];
 
+  if (sortOption === "lowToHigh") {
+  filteredProducts.sort(
+    (a, b) => a.price - b.price
+    );
+  }
+
+  if (sortOption === "highToLow") {
+    filteredProducts.sort(
+      (a, b) => b.price - a.price
+    );
+  }
+
+  if (sortOption === "rating") {
+    filteredProducts.sort(
+      (a, b) => b.rating - a.rating
+    );
+  }
+
   return (
     <div className="px-4 pt-8 max-w-6xl mx-auto">
         <h1 className="text-2xl font-bold mb-6">All Products</h1>
-        <div className="mb-6">
+        <div className="mb-6 grid grid-cols-3 gap-2">
 
           <input
             type="text"
@@ -78,7 +96,7 @@ export default function Product() {
             onChange={(e) =>
               setSelectedCategory(e.target.value)
             }
-            className="border p-2 rounded mt-4 w-full"
+            className="border p-2 rounded  w-full"
           >
             {categories.map((category) => (
               <option
@@ -88,6 +106,23 @@ export default function Product() {
                 {category}
               </option>
             ))}
+          </select>
+
+          <select
+            value={sortOption}
+            onChange={(e) => setSortOption(e.target.value)}
+            className="border p-2 rounded w-full"
+          >
+            <option value="">Default</option>
+            <option value="lowToHigh">
+              Price: Low → High
+            </option>
+            <option value="highToLow">
+              Price: High → Low
+            </option>
+            <option value="rating">
+              Rating: High → Low
+            </option>
           </select>
 
         </div>

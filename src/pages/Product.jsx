@@ -4,12 +4,15 @@ import ProductCard from "../components/ProductCard";
 import { useContext } from "react";
 import { CartContext } from "../context/CartContext";
 
+import { useDispatch } from "react-redux";
+import { addToCart } from "../features/cart/cartSlice";
+
 export default function Product() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   // const [cart , setCart] = useState([]);
-  const { addToCart } = useContext(CartContext);
+  const dispatch = useDispatch();
 
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
@@ -131,7 +134,9 @@ export default function Product() {
             <ProductCard
               key={item.id}
               item={item}
-              onAddToCart={addToCart}
+              onAddToCart={(item) =>
+                    dispatch(addToCart(item))
+                }
             />
           ))}
         </div>

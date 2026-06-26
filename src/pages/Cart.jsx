@@ -1,10 +1,12 @@
-import { useContext } from "react";
-import { CartContext } from "../context/CartContext";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 
 export default function Cart() {
-  const { cart, removeFromCart , addToCart, decreaseQuantity } = useContext(CartContext);
+  const cart = useSelector(
+    (state) => state.cart.items
+  );
+  const {removeFromCart , addToCart, decreaseQuantity } = useContext(CartContext);
 
   if (cart.length === 0) {
     return (

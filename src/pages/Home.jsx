@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import { getProducts } from "../services/api";
 import ProductCard from "../components/ProductCard";
-import { useContext } from "react";
-import { CartContext } from "../context/CartContext";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../features/cart/cartSlice";
 import { Link } from "react-router-dom";
 
 export default function Home() {
   const [products, setProducts] = useState([]);
-  const { addToCart } = useContext(CartContext);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     getProducts().then((res) => {
@@ -49,7 +49,9 @@ export default function Home() {
             <ProductCard
               key={item.id}
               item={item}
-              onAddToCart={addToCart}
+              onAddToCart={(item) =>
+                dispatch(addToCart(item))
+              }
             />
           ))}
         </div>

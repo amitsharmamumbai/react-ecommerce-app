@@ -1,12 +1,19 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  addToCart,
+  removeFromCart,
+  decreaseQuantity,
+} from "../features/cart/cartSlice";
 import { Link } from "react-router-dom";
 
 
 export default function Cart() {
+
+  const dispatch = useDispatch();
+
   const cart = useSelector(
     (state) => state.cart.items
   );
-  const {removeFromCart , addToCart, decreaseQuantity } = useContext(CartContext);
 
   if (cart.length === 0) {
     return (
@@ -63,7 +70,7 @@ export default function Cart() {
               {/* Quantity controls */}
               <div className="flex items-center gap-2 mt-2">
                 <button
-                  onClick={() => decreaseQuantity(index)}
+                  onClick={() => dispatch(decreaseQuantity(index))}
                   className=" cursor-pointer px-2 bg-gray-200"
                 >
                   -
@@ -72,7 +79,7 @@ export default function Cart() {
                 <span>{item.quantity}</span>
 
                 <button
-                  onClick={() => addToCart(item)}
+                  onClick={() => dispatch(addToCart(item))}
                   className="cursor-pointer px-2 bg-gray-200"
                 >
                   +
@@ -81,7 +88,7 @@ export default function Cart() {
             </div>
 
             <button
-              onClick={() => removeFromCart(index)}
+              onClick={() => dispatch(removeFromCart(index))}
               className="cursor-pointer text-red-500 text-sm"
             >
               Remove

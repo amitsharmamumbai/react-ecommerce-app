@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { getProducts } from "../services/api";
 import ProductCard from "../components/ProductCard";
-import { useContext } from "react";
-import { CartContext } from "../context/CartContext";
+// import { useContext } from "react";
+// import { CartContext } from "../context/CartContext";
 
 import { useDispatch } from "react-redux";
 import { addToCart } from "../features/cart/cartSlice";

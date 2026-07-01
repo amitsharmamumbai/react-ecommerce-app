@@ -1,9 +1,14 @@
 import { Link } from "react-router-dom";
-import { useContext } from "react";
-import { CartContext } from "../context/CartContext";
+import { useSelector } from "react-redux";
 
 export default function Navbar() {
-  const { cart } = useContext(CartContext);
+  const cart = useSelector(
+    (state) => state.cart.items
+  );
+
+  const totalItems = cart.reduce((total, item) => {
+    return total + item.quantity;
+  }, 0);
 
   return (
     <nav className="sticky top-0 bg-white shadow z-10">
@@ -22,7 +27,7 @@ export default function Navbar() {
           <Link to="/cart" className="relative">
             Cart
             <span className="ml-1 text-xs bg-black text-white px-2 py-0.5 rounded">
-              {cart.length}
+              {totalItems}
             </span>
           </Link>
         </div>

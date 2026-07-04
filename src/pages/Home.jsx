@@ -49,9 +49,6 @@ export default function Home() {
             <ProductCard
               key={item.id}
               item={item}
-              onAddToCart={(item) =>
-                dispatch(addToCart(item))
-              }
             />
           ))}
         </div>

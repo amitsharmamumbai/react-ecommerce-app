@@ -134,9 +134,6 @@ export default function Product() {
             <ProductCard
               key={item.id}
               item={item}
-              onAddToCart={(item) =>
-                    dispatch(addToCart(item))
-                }
             />
           ))}
         </div>

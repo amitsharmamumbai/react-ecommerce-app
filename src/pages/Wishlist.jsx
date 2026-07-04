@@ -44,7 +44,7 @@ export default function Wishlist() {
                 className="flex items-center gap-4 border p-4 rounded shadow-sm"
               >
                 <img
-                  src={item.image}
+                  src={item.thumbnail}
                   alt={item.title}
                   className="w-20 h-20 object-contain"
                 />

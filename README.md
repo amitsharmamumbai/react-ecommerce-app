@@ -1,16 +1,156 @@
-# React + Vite
+# 🛒 React E-Commerce App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern and responsive e-commerce web application built using **React.js** and **Redux Toolkit**. This project demonstrates real-world frontend development concepts such as global state management, routing, API integration, wishlist management, cart persistence, and responsive UI.
 
-Currently, two official plugins are available:
+## 🚀 Live Demo
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+https://react-ecommerce-app-pink.vercel.app/
 
-## React Compiler
+## ✨ Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- 🏠 Home Page with featured products
+- 🛍️ Product Listing Page
+- 🔍 Product Details Page
+- 🛒 Shopping Cart
+- ❤️ Wishlist
+- ➕ Add to Cart
+- ➕ Add to Wishlist
+- ➖ Remove from Cart
+- ➖ Remove from Wishlist
+- 📦 Cart Quantity Management
+- 💾 Persistent Cart & Wishlist using localStorage
+- 🔄 Global State Management using Redux Toolkit
+- 📱 Fully Responsive Design
+- 🚦 Client-side Routing using React Router
+- 🌐 Deployed on Vercel
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 🛠️ Tech Stack
+
+- React.js
+- JavaScript (ES6+)
+- Redux Toolkit
+- React Router DOM
+- Tailwind CSS
+- Axios
+- Vite
+- Local Storage
+- React Icons
+- Vercel
+
+---
+
+## 📂 Folder Structure
+
+```text
+src/
+├── app/
+│   ├── store.js
+│   └── storage.js
+│
+├── components/
+│   ├── Navbar.jsx
+│   └── ProductCard.jsx
+│
+├── features/
+│   ├── cart/
+│   │   └── cartSlice.js
+│   └── wishlist/
+│       └── wishlistSlice.js
+│
+├── pages/
+│   ├── Home.jsx
+│   ├── Product.jsx
+│   ├── ProductDetails.jsx
+│   ├── Cart.jsx
+│   └── Wishlist.jsx
+│
+├── services/
+│   └── api.js
+│
+├── App.jsx
+└── main.jsx
+```
+
+---
+
+## ⚙️ Installation
+
+Clone the repository
+
+```bash
+git clone https://github.com/amitsharmamumbai/react-ecommerce-app
+```
+
+Navigate to the project
+
+```bash
+cd ecommerce-app
+```
+
+Install dependencies
+
+```bash
+npm install
+```
+
+Run the development server
+
+```bash
+npm run dev
+```
+
+---
+
+## 🧠 What I Learned
+
+While building this project, I gained hands-on experience with:
+
+- React Component Architecture
+- React Router
+- Redux Toolkit
+- Global State Management
+- Store Configuration
+- createSlice()
+- useDispatch()
+- useSelector()
+- store.subscribe()
+- store.getState()
+- localStorage Persistence
+- JSON.stringify() & JSON.parse()
+- Responsive UI Design with Tailwind CSS
+- REST API Integration using Axios
+- Deploying React applications on Vercel
+- Fixing React Router refresh issues on Vercel using `vercel.json`
+
+---
+
+## 🔮 Future Improvements
+
+- 🔔 Toast Notifications
+- 🔍 Advanced Search
+- 🎯 Category Filters
+- 📊 Sorting
+- 📄 Pagination / Infinite Scroll
+- 🌙 Dark Mode
+- 🔐 User Authentication
+- 👤 User Profile
+- 📦 Order History
+- 💳 Payment Integration
+
+---
+
+## 👨‍💻 Author
+
+**Amit Sharma**
+
+GitHub: https://github.com/amitsharmamumbai
+
+LinkedIn: https://www.linkedin.com/in/amit-sharma-6237b2104/
+
+---
+
+## ⭐ Support
+
+If you found this project helpful, please consider giving it a ⭐ on GitHub.

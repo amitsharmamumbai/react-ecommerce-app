@@ -1,7 +1,10 @@
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getProductById } from "../services/api";
 // import { CartContext } from "../context/CartContext";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../features/cart/cartSlice";
+import { toast } from "react-toastify"
 
 export default function ProductDetails() {
   const { id } = useParams();
@@ -10,7 +13,7 @@ export default function ProductDetails() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
 
-  const { addToCart } = useContext(CartContext);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     getProductById(id)
@@ -39,6 +42,13 @@ export default function ProductDetails() {
         Product not found
       </h1>
     );
+  }
+
+  const handleAddToCart = () =>{
+    dispatch(addToCart(product));
+    toast.success("Product added to cart" , {
+      toastId: "add-to-cart",
+    })
   }
 
   return (
@@ -83,7 +93,7 @@ export default function ProductDetails() {
           </p>
 
           <button
-            onClick={() => addToCart(product)}
+            onClick={handleAddToCart}
             className="mt-8 bg-black text-white px-6 py-3 rounded hover:bg-gray-800"
           >
             Add To Cart

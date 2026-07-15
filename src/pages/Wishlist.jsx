@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { removeFromWishlist } from "../features/wishlist/wishlistSlice";
 import { addToCart } from "../features/cart/cartSlice";
+import { toast } from "react-toastify";
 
 export default function Wishlist() {
 
@@ -10,6 +11,20 @@ export default function Wishlist() {
   const wishlist = useSelector(
     (state) => state.wishlist.items
   )
+
+  const handleRemoveFromWishlist = (item) =>{
+    dispatch(removeFromWishlist(item.id))
+    toast.success("Product removed from wishlist" , {
+      toastId: "remove-from-wishlist",
+    })
+  }
+
+  const handleAddToCart = (item) =>{
+    dispatch(addToCart(item));
+    toast.success("Product added to cart" , {
+      toastId: "add-to-cart",
+    })
+  }
 
   if(wishlist.length === 0){
      return (
@@ -61,14 +76,14 @@ export default function Wishlist() {
                   {/* Wishlist actions */}
                   <div className="flex gap-3 mt-4">
                     <button
-                      onClick={() => dispatch(removeFromWishlist(item.id))}
+                      onClick={() => handleRemoveFromWishlist(item)}
                       className=" cursor-pointer bg-red-500 text-white px-4 py-2 rounded"
                     >
                       Remove
                     </button>
         
                     <button
-                      onClick={() => dispatch(addToCart(item))}
+                      onClick={() => handleAddToCart(item)}
                       className="cursor-pointer bg-black text-white px-4 py-2 rounded"
                     >
                       Add to Cart

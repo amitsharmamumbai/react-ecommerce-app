@@ -94,7 +94,7 @@ export default function ProductDetails() {
 
           <button
             onClick={handleAddToCart}
-            className="mt-8 bg-black text-white px-6 py-3 rounded hover:bg-gray-800"
+            className="mt-8 cursor-pointer bg-black text-white px-6 py-3 rounded hover:bg-gray-800"
           >
             Add To Cart
           </button>

@@ -5,6 +5,7 @@ import {
   decreaseQuantity,
 } from "../features/cart/cartSlice";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 
 
 export default function Cart() {
@@ -14,6 +15,13 @@ export default function Cart() {
   const cart = useSelector(
     (state) => state.cart.items
   );
+
+  const handleRemoveFromCart = (index) =>{
+    dispatch(removeFromCart(index));
+    toast.success("Product removed from cart" , {
+      toastId: "remove-from-cart",
+    })
+  }
 
   if (cart.length === 0) {
     return (
@@ -88,7 +96,7 @@ export default function Cart() {
             </div>
 
             <button
-              onClick={() => dispatch(removeFromCart(index))}
+              onClick={ () => handleRemoveFromCart(index)}
               className="cursor-pointer text-red-500 text-sm"
             >
               Remove

@@ -3,6 +3,7 @@ import { getProducts } from "../services/api";
 import ProductCard from "../components/ProductCard";
 // import { useContext } from "react";
 // import { CartContext } from "../context/CartContext";
+import SkeletonCard from "../components/SkeletonCard";
 
 import { useDispatch } from "react-redux";
 import { addToCart } from "../features/cart/cartSlice";
@@ -13,6 +14,8 @@ export default function Product() {
   const [error, setError] = useState(false);
   // const [cart , setCart] = useState([]);
   const dispatch = useDispatch();
+
+  const SKELETON_COUNT = 8;
 
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
@@ -32,12 +35,18 @@ export default function Product() {
   }, []);
 
   if (loading) {
-    return (
-      <div className="flex items-center justify-center h-[70vh]">
-        <div className="w-10 h-10 border-4 border-gray-300 border-t-black rounded-full animate-spin"></div>
+  return (
+    <div className="px-4 pt-8 max-w-6xl mx-auto">
+
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
+        {Array.from({ length: SKELETON_COUNT }).map((_, index) => (
+          <SkeletonCard key={index} />
+        ))}
       </div>
-    );
-  }
+
+    </div>
+  );
+}
 
   if (error) {
     return <h1 className="p-8 text-red-500">Something went wrong</h1>;

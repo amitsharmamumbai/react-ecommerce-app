@@ -17,22 +17,42 @@ export default function Product() {
 
   const SKELETON_COUNT = 8;
 
+  const PRODUCTS_PER_PAGE = 8; 
+
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const [totalProducts , setTotalProducts] = useState(0);
+
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [sortOption, setSortOption] = useState("");
 
   useEffect(()=>{
-    getProducts()
+
+    setLoading(true);
+
+    const skip = (currentPage - 1) * PRODUCTS_PER_PAGE;
+
+    getProducts(PRODUCTS_PER_PAGE , skip)
     .then((res)=>{
       setProducts(res.data.products);
+      setTotalProducts(res.data.total);
       setLoading(false);
   })
     .catch((err)=>{
-        console.log(err);
         setError(true);
         setLoading(false);
     })
-  }, []);
+  }, [currentPage]);
+
+  const totalPages = Math.ceil(totalProducts / PRODUCTS_PER_PAGE);
+
+  const pages = [];
+
+  for(let i = 1 ; i <= totalPages; i++){
+    pages.push(i);
+  }
+
 
   if (loading) {
   return (
@@ -87,6 +107,51 @@ export default function Product() {
       (a, b) => b.rating - a.rating
     );
   }
+
+  const START_PAGES = 6;
+  const SIDE_PAGES = 2;
+  const displayPages = [];
+
+  //Beginning case start
+
+  if (currentPage <= 4) {
+    for (let i = 1; i <= Math.min(START_PAGES, totalPages); i++) {
+      displayPages.push(i);
+    }
+
+    if (totalPages > START_PAGES) {
+      displayPages.push("...");
+      displayPages.push(totalPages);
+    }
+  }
+  // Beginning case end
+
+  // End case start
+
+  else if (currentPage >= totalPages - 3) {
+    displayPages.push(1);
+    displayPages.push("...");
+
+    for (let i = totalPages - 5; i <= totalPages; i++) {
+      displayPages.push(i);
+    }
+  }
+  // End case ends
+
+  // Middle case starts
+
+  else {
+    displayPages.push(1);
+    displayPages.push("...");
+
+    for (let i = currentPage - SIDE_PAGES; i <= currentPage + SIDE_PAGES; i++) {
+      displayPages.push(i);
+    }
+
+    displayPages.push("...");
+    displayPages.push(totalPages);
+  }
+  // Middle case ends
 
   return (
     <div className="px-4 pt-8 max-w-6xl mx-auto">
@@ -145,6 +210,53 @@ export default function Product() {
               item={item}
             />
           ))}
+        </div>
+        <div className="flex items-center justify-between">
+          <div className="flex justify-end mt-y">
+            <button
+              onClick={() => setCurrentPage(currentPage - 1)}
+              disabled = {currentPage === 1}
+              className="bg-blue-600 cursor-pointer text-white px-4 py-2 rounded hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed"
+            >
+              ← Previous
+            </button>
+          </div>
+          <div className="flex items-center my-8">
+            {
+              displayPages.map((page, index) => {
+                if (page === "...") {
+                  return (
+                    <span key={`ellipsis-${index}`} className="mx-2">
+                      ...
+                    </span>
+                  );
+                }
+
+                return (
+                  <button
+                    key={page}
+                    onClick={() => setCurrentPage(page)}
+                    className={`px-3 py-2 cursor-pointer border rounded mx-1 ${
+                      page === currentPage
+                        ? "bg-blue-600 text-white"
+                        : "bg-white text-black"
+                    }`}
+                  >
+                    {page}
+                  </button>
+                );
+              })
+            }
+          </div>
+          <div className="flex justify-end my-8">
+            <button
+              onClick={() => setCurrentPage(currentPage + 1)}
+              disabled = {currentPage === totalPages}
+              className="bg-blue-600 cursor-pointer text-white px-4 py-2 rounded hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed"
+            >
+              Next →
+            </button>
+          </div>
         </div>
     </div>
   );

@@ -1,19 +1,14 @@
 import { useEffect, useState } from "react";
 import { getProducts } from "../services/api";
 import ProductCard from "../components/ProductCard";
-import { useDispatch } from "react-redux";
-import { addToCart } from "../features/cart/cartSlice";
 import { Link } from "react-router-dom";
 
 export default function Home() {
   const [products, setProducts] = useState([]);
-  const dispatch = useDispatch();
 
   useEffect(() => {
-    getProducts().then((res) => {
-      setProducts(
-        res.data.products.slice(0, 8)
-      );
+    getProducts(8,0).then((res) => {
+      setProducts(res.data.products);
     });
   }, []);
 
